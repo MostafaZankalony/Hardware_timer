@@ -106,6 +106,14 @@ void main (void){
 				    }
 				    case 12:{
 				    	start_timer();
+				        if (flag_reset==0){
+				        	 LCD_vidSendCommand(lcd_Clear);
+				        	 Gotoxy(1,0);
+				        	 LCD_vidWriteString("Timer: finished");
+				    	     DIO_SetPinValue(PORT_A,PIN_6,PIN_HIGH);
+				    	     _delay_ms(5000);
+				    	     DIO_SetPinValue(PORT_A,PIN_6,PIN_LOW);
+				    }
 				    	WDT_ON();
 						break;
 					}
@@ -214,15 +222,8 @@ void start_timer(void){
 	    	}
 	    	num2=59;
 		}
+		break;
 	}
-    if (flag_reset==0){
-    	 LCD_vidSendCommand(lcd_Clear);
-    	 Gotoxy(1,0);
-    	 LCD_vidWriteString("Timer: finished");
-	     DIO_SetPinValue(PORT_A,PIN_6,PIN_HIGH);
-	     _delay_ms(5000);
-	     DIO_SetPinValue(PORT_A,PIN_6,PIN_LOW);
-}
 }
 void reset_timer(void){
 	flag_reset=1;
